@@ -25,7 +25,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'k+_y0&-+l^@7w+y3%6#c4wav1bvd7k9p(z%m5m-c00*5ssu7$7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+HEROKU = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -77,8 +78,7 @@ WSGI_APPLICATION = 'real_estate.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'real_estate',
@@ -87,8 +87,9 @@ if DEBUG:
             'HOST': 'localhost',
             'PORT': '5432',
         }
-    }
-else:
+}
+
+if HEROKU:
     DATABASES = {
         'default': dj_database_url.config(
             default=config('DATABASE_URL')
