@@ -79,12 +79,6 @@ WSGI_APPLICATION = 'real_estate.wsgi.application'
 
 if DEBUG:
     DATABASES = {
-        'default': dj_database_url.config(
-            default=config('DATABASE_URL')
-        )
-    }
-else:
-    DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'real_estate',
@@ -93,6 +87,12 @@ else:
             'HOST': 'localhost',
             'PORT': '5432',
         }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
     }
 
 
