@@ -25,3 +25,7 @@ def properties(request):
         'images': images
     }
     return render(request, 'property-grid.html', context)
+
+
+def contact(request):
+    return render(request,'contact.html')
