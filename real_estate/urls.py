@@ -17,12 +17,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from search.views import index, about
+from search.views import index, about, properties
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('about/', about,  name='about')
+    path('nosotros/', about,  name='about'),
+    path('propiedades/', properties,  name='properties'),
 ]
 urlpatterns += static(
     settings.STATIC_URL, document_root=settings.STATIC_ROOT
