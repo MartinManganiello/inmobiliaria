@@ -11,3 +11,17 @@ def index(request):
         'images': images
     }
     return render(request, 'index.html', context)
+
+
+def about(request):
+    return render(request, 'about.html')
+
+
+def properties(request):
+    latest = Estate.objects.all().order_by('created')
+    images = Image.objects.filter(estate__in=latest).distinct('estate')
+
+    context = {
+        'images': images
+    }
+    return render(request, 'property-grid.html', context)
