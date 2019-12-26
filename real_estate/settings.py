@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import dj_database_url
 from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -27,7 +26,10 @@ SECRET_KEY = 'k+_y0&-+l^@7w+y3%6#c4wav1bvd7k9p(z%m5m-c00*5ssu7$7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 
-SECRET_KEY = config('SECRET_KEY', default='k+_y0&-+l^@7w+y3%6#c4wav1bvd7k9p(z%m5m-c00*5ssu7$7')
+SECRET_KEY = config(
+    'SECRET_KEY',
+    default='k+_y0&-+l^@7w+y3%6#c4wav1bvd7k9p(z%m5m-c00*5ssu7$7'
+)
 
 ALLOWED_HOSTS = ['*']
 
