@@ -152,4 +152,4 @@ pip-selfcheck.json
 .history
 
 # End of https://www.gitignore.io/api/git,python,virtualenv,visualstudiocode
-static_cdn/
+media/
