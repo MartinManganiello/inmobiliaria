@@ -11,3 +11,7 @@ def index(request):
         'images': images
     }
     return render(request, 'index.html', context)
+
+
+def about(request):
+    return render(request, 'about.html')
