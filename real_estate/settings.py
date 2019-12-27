@@ -148,4 +148,5 @@ TEMPLATE_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
-    from .settings_production import *
+    from .settings_production import DATABASES as db
+    DATABASES = db
