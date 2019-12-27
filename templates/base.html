@@ -193,9 +193,9 @@
             <div class="w-footer-a">
               <ul class="list-unstyled">
                 <li class="color-a">
-                  <span class="color-text-a">Phone .</span> contact@example.com</li>
+                  <span class="color-text-a">Email .</span> contact@example.com</li>
                 <li class="color-a">
-                  <span class="color-text-a">Email .</span> +54 356 945234</li>
+                  <span class="color-text-a">Telefono .</span> +54 356 945234</li>
               </ul>
             </div>
           </div>
@@ -203,28 +203,22 @@
         <div class="col-sm-12 col-md-4 section-md-t3">
           <div class="widget-a">
             <div class="w-header-a">
-              <h3 class="w-title-a text-brand">The Company</h3>
+              <h3 class="w-title-a text-brand">Empresa</h3>
             </div>
             <div class="w-body-a">
               <div class="w-body-a">
                 <ul class="list-unstyled">
                   <li class="item-list-a">
-                    <i class="fa fa-angle-right"></i> <a href="#">Site Map</a>
+                    <i class="fa fa-angle-right"></i> <a href="#">Mapa</a>
                   </li>
                   <li class="item-list-a">
                     <i class="fa fa-angle-right"></i> <a href="#">Legal</a>
                   </li>
                   <li class="item-list-a">
-                    <i class="fa fa-angle-right"></i> <a href="#">Agent Admin</a>
+                    <i class="fa fa-angle-right"></i> <a href="#">Agente Administración</a>
                   </li>
                   <li class="item-list-a">
-                    <i class="fa fa-angle-right"></i> <a href="#">Careers</a>
-                  </li>
-                  <li class="item-list-a">
-                    <i class="fa fa-angle-right"></i> <a href="#">Affiliate</a>
-                  </li>
-                  <li class="item-list-a">
-                    <i class="fa fa-angle-right"></i> <a href="#">Privacy Policy</a>
+                    <i class="fa fa-angle-right"></i> <a href="#">Politicas de Privacidad</a>
                   </li>
                 </ul>
               </div>
@@ -234,7 +228,7 @@
         <div class="col-sm-12 col-md-4 section-md-t3">
           <div class="widget-a">
             <div class="w-header-a">
-              <h3 class="w-title-a text-brand">International sites</h3>
+              <h3 class="w-title-a text-brand">Sitios Internationales</h3>
             </div>
             <div class="w-body-a">
               <ul class="list-unstyled">
@@ -251,10 +245,10 @@
                   <i class="fa fa-angle-right"></i> <a href="#">Argentina</a>
                 </li>
                 <li class="item-list-a">
-                  <i class="fa fa-angle-right"></i> <a href="#">Singapore</a>
+                  <i class="fa fa-angle-right"></i> <a href="#">Singapur</a>
                 </li>
                 <li class="item-list-a">
-                  <i class="fa fa-angle-right"></i> <a href="#">Philippines</a>
+                  <i class="fa fa-angle-right"></i> <a href="#">Filipinas</a>
                 </li>
               </ul>
             </div>
@@ -270,19 +264,16 @@
           <nav class="nav-footer">
             <ul class="list-inline">
               <li class="list-inline-item">
-                <a href="#">Home</a>
+                <a href="{% url 'index' %}">Inicio</a>
               </li>
               <li class="list-inline-item">
-                <a href="#">About</a>
+                <a href="{% url 'about' %}">Nosotros</a>
               </li>
               <li class="list-inline-item">
-                <a href="#">Property</a>
+                <a href="{% url 'properties' %}">Propiedades</a>
               </li>
               <li class="list-inline-item">
-                <a href="#">Blog</a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">Contact</a>
+                <a href="{% url 'contact' %}">Contacto</a>
               </li>
             </ul>
           </nav>
