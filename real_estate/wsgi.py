@@ -9,8 +9,12 @@ https://docs.djangoproject.com/en/3.0/howto/deployment/wsgi/
 
 import os
 
+from whitenoise import WhiteNoise
+
 from django.core.wsgi import get_wsgi_application
+from . import settings
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'real_estate.settings')
 
 application = get_wsgi_application()
+application = WhiteNoise(application, root=settings.BASE_DIR + settings.STATIC_URL)
