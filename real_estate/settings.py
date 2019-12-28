@@ -25,7 +25,6 @@ SECRET_KEY = 'k+_y0&-+l^@7w+y3%6#c4wav1bvd7k9p(z%m5m-c00*5ssu7$7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
-DEBUG_PROPAGATE_EXCEPTIONS = True
 
 SECRET_KEY = config(
     'SECRET_KEY',
@@ -141,7 +140,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TEMPLATE_DIRS = [
     os.path.join(BASE_DIR, 'templates'),
