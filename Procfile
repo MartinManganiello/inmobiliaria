@@ -1,1 +1,1 @@
-web: gunicorn real_estate.wsgi --log-file -
+web: python manage.py collectstatic --no-input; gunicorn real_estate.wsgi --log-file - --log-level debug
