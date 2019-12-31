@@ -26,6 +26,14 @@ urlpatterns = [
     path('propiedades/', views.properties,  name='properties'),
     path('contacto/', views.contact,  name='contact'),
 ]
+urlpatterns += static(
+    settings.STATIC_URL,
+    document_root=settings.STATIC_ROOT
+)
+urlpatterns += static(
+    settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT
+)
 
 if settings.DEBUG:
     urlpatterns += static(
