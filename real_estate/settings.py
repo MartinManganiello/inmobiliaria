@@ -32,7 +32,7 @@ SECRET_KEY = config(
     default='k+_y0&-+l^@7w+y3%6#c4wav1bvd7k9p(z%m5m-c00*5ssu7$7'
 )
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['inmobiliaria2020.herokuapp.com', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
