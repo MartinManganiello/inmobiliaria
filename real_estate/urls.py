@@ -15,33 +15,9 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path
+from django.conf.urls.static import static
 from search import views
-import re
-from urllib.parse import urlsplit
-from django.core.exceptions import ImproperlyConfigured
-from django.views.static import serve
-
-
-def static(prefix, view=serve, **kwargs):
-    """
-    Return a URL pattern for serving files in debug mode.
-
-    from django.conf import settings
-    from django.conf.urls.static import static
-
-    urlpatterns = [
-        # ... the rest of your URLconf goes here ...
-    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    """
-    if not prefix:
-        raise ImproperlyConfigured("Empty static prefix not permitted")
-    elif settings.DEBUG or urlsplit(prefix).netloc:
-        # No-op if not in debug mode or a non-local prefix.
-        return []
-    return [
-        re_path(r'^%s(?P<path>.*)$' % re.escape(prefix.lstrip('/')), view, kwargs=kwargs),
-    ]
 
 
 urlpatterns = [
@@ -52,11 +28,12 @@ urlpatterns = [
     path('contacto/', views.contact,  name='contact'),
 ]
 
-urlpatterns += static(
-    settings.STATIC_URL,
-    document_root=settings.STATIC_ROOT
-)
-urlpatterns += static(
-    settings.MEDIA_URL,
-    document_root=settings.MEDIA_ROOT
-)
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.STATIC_URL,
+        document_root=settings.STATIC_ROOT
+    )
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )
