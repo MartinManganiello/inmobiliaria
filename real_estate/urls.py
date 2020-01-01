@@ -34,11 +34,11 @@ def static(prefix, view=serve, **kwargs):
         # ... the rest of your URLconf goes here ...
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     """
-    if urlsplit(prefix).netloc:
+    if not prefix:
+        raise ImproperlyConfigured("Empty static prefix not permitted")
+    elif urlsplit(prefix).netloc:
         # No-op if not in debug mode or a non-local prefix.
         return []
-    elif not prefix:
-        raise ImproperlyConfigured("Empty static prefix not permitted")
     return [
         re_path(r'^%s(?P<path>.*)$' % re.escape(prefix.lstrip('/')), view, kwargs=kwargs),
     ]
