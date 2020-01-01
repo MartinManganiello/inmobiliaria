@@ -99,7 +99,7 @@
               <div class="card-overlay-a-content">
                 <div class="card-header-a">
                   <h2 class="card-title-a">
-                    <a href="property-single.html">{{image.estate.address}}
+                    <a href="{% url 'property-single' id=image.estate.id %}">{{image.estate.address}}
                       <br /> {{image.estate.province}}</a>
                   </h2>
                 </div>
