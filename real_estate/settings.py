@@ -163,7 +163,7 @@ if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
         'AWS_STORAGE_BUCKET_NAME',
         default='inmobiliaria'
     )
-    AWS_S3_CUSTOM_DOMAIN = '{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'.format(
+    AWS_S3_CUSTOM_DOMAIN = '{AWS_STORAGE_BUCKET_NAME}.s3-sa-east-1.amazonaws.com'.format(
         AWS_STORAGE_BUCKET_NAME=AWS_STORAGE_BUCKET_NAME
     )
     AWS_S3_OBJECT_PARAMETERS = {
