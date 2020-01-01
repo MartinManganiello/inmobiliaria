@@ -34,7 +34,7 @@ def static(prefix, view=serve, **kwargs):
         # ... the rest of your URLconf goes here ...
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     """
-    if not settings.DEBUG or urlsplit(prefix).netloc:
+    if urlsplit(prefix).netloc:
         # No-op if not in debug mode or a non-local prefix.
         return []
     elif not prefix:
