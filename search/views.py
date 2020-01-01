@@ -29,3 +29,13 @@ def properties(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+
+def property_single(request, id):
+    estate = Estate.objects.get(id=id)
+    images = Image.objects.filter(estate=estate)
+    context = {
+        'estate': estate,
+        'images': images
+    }
+    return render(request, 'property-single.html', context)
