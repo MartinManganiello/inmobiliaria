@@ -150,6 +150,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles', "media-root")
 if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
     from .settings_production import DATABASES as db
     DATABASES = db
+    AWS_DEFAULT_ACL = None
     AWS_ACCESS_KEY_ID = config(
         'AWS_ACCESS_KEY_ID',
         default='AKIAYP73WOXS3Q4UFDUN'
