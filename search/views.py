@@ -5,7 +5,9 @@ from search.models import Estate, Image
 # Create your views here.
 def index(request):
     latest = Estate.objects.all().order_by('-created')[:3]
-    images = Image.objects.filter(estate__in=latest).distinct('estate').order_by('-estate')
+    images = Image.objects.filter(estate__in=latest).distinct(
+        'estate').order_by('-estate'
+                           )
 
     context = {
         'images': images
