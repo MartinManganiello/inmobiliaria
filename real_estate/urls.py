@@ -14,10 +14,35 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from search import views
+import re
+from urllib.parse import urlsplit
+from django.core.exceptions import ImproperlyConfigured
+from django.views.static import serve
+
+
+def static(prefix, view=serve, **kwargs):
+    """
+    Return a URL pattern for serving files in debug mode.
+
+    from django.conf import settings
+    from django.conf.urls.static import static
+
+    urlpatterns = [
+        # ... the rest of your URLconf goes here ...
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    """
+    if not settings.DEBUG or urlsplit(prefix).netloc:
+        # No-op if not in debug mode or a non-local prefix.
+        return []
+    elif not prefix:
+        raise ImproperlyConfigured("Empty static prefix not permitted")
+    return [
+        re_path(r'^%s(?P<path>.*)$' % re.escape(prefix.lstrip('/')), view, kwargs=kwargs),
+    ]
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
