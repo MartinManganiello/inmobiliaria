@@ -36,7 +36,7 @@ def static(prefix, view=serve, **kwargs):
     """
     if not prefix:
         raise ImproperlyConfigured("Empty static prefix not permitted")
-    elif urlsplit(prefix).netloc:
+    elif settings.DEBUG or urlsplit(prefix).netloc:
         # No-op if not in debug mode or a non-local prefix.
         return []
     return [
