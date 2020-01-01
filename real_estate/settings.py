@@ -13,21 +13,19 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from decouple import config
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_NAME = 'real_estate'
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'k+_y0&-+l^@7w+y3%6#c4wav1bvd7k9p(z%m5m-c00*5ssu7$7'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config(
     'SECRET_KEY',
     default='k+_y0&-+l^@7w+y3%6#c4wav1bvd7k9p(z%m5m-c00*5ssu7$7'
@@ -46,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'search',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -59,12 +58,12 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
-ROOT_URLCONF = 'real_estate.urls'
+ROOT_URLCONF = '{PROJECT_NAME}.urls'.format(PROJECT_NAME=PROJECT_NAME)
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, PROJECT_NAME, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,8 +76,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'real_estate.wsgi.application'
-
+WSGI_APPLICATION = '{PROJECT_NAME}.wsgi.application'.format(
+    PROJECT_NAME=PROJECT_NAME
+)
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -135,21 +135,42 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "staticfiles"),
+    os.path.join(BASE_DIR, PROJECT_NAME, 'static'),
 ]
 
 TEMPLATE_DIRS = [
-    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(BASE_DIR, PROJECT_NAME, 'templates'),
 ]
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles", "static")
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles', 'static-root')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "staticfiles", "media")
-
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles', "media-root")
 
 if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
     from .settings_production import DATABASES as db
     DATABASES = db
+    AWS_ACCESS_KEY_ID = config(
+        'AWS_ACCESS_KEY_ID',
+        default='AKIAYP73WOXS3Q4UFDUN'
+    )
+    AWS_SECRET_ACCESS_KEY = config(
+        'AWS_SECRET_ACCESS_KEY',
+        default='qPpcCnHHGV1/zvmTCVmbFAIRN1LHVfi9pKNT+w1d'
+    )
+    AWS_STORAGE_BUCKET_NAME = config(
+        'AWS_STORAGE_BUCKET_NAME',
+        default='inmobiliaria'
+    )
+    AWS_S3_CUSTOM_DOMAIN = '{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'.format(
+        AWS_STORAGE_BUCKET_NAME=AWS_STORAGE_BUCKET_NAME
+    )
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
+    AWS_LOCATION = 'static'
+    STATIC_URL = 'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'.format(
+        AWS_S3_CUSTOM_DOMAIN=AWS_S3_CUSTOM_DOMAIN,
+        AWS_LOCATION=AWS_LOCATION
+    )
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
