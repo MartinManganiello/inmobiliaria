@@ -151,6 +151,7 @@ if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
     from .settings_production import DATABASES as db
     DATABASES = db
     AWS_DEFAULT_ACL = None
+    AMAZON_DOMAIN = 's3-sa-east-1.amazonaws.com'
     AWS_ACCESS_KEY_ID = config(
         'AWS_ACCESS_KEY_ID',
         default='AKIAYP73WOXS3Q4UFDUN'
@@ -163,11 +164,11 @@ if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
         'AWS_STORAGE_BUCKET_NAME',
         default='inmobiliaria'
     )
-    AWS_S3_CUSTOM_DOMAIN = '{AWS_STORAGE_BUCKET_NAME}.s3-sa-east-1.amazonaws.com'.format(
-        AWS_STORAGE_BUCKET_NAME=AWS_STORAGE_BUCKET_NAME
+    AWS_S3_CUSTOM_DOMAIN = '{AWS_STORAGE_BUCKET_NAME}.{AMAZON_DOMAIN}'.format(
+        AWS_STORAGE_BUCKET_NAME=AWS_STORAGE_BUCKET_NAME,
+        AMAZON_DOMAIN=AMAZON_DOMAIN,
     )
     AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',
     }
     AWS_LOCATION = 'static'
     STATIC_URL = 'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'.format(
