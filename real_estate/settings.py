@@ -33,7 +33,6 @@ SECRET_KEY = config(
 
 ALLOWED_HOSTS = ['inmobiliaria2020.herokuapp.com', '127.0.0.1', '0.0.0.0', '*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -169,11 +168,12 @@ if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
         AMAZON_DOMAIN=AMAZON_DOMAIN,
     )
     AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
     }
     AWS_LOCATION = 'static'
     STATIC_URL = 'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'.format(
         AWS_S3_CUSTOM_DOMAIN=AWS_S3_CUSTOM_DOMAIN,
-        AWS_LOCATION=AWS_LOCATION
+        AWS_LOCATION=AWS_LOCATION,
     )
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     DEFAULT_FILE_STORAGE = 'real_estate.storage_backends.MediaStorage'
