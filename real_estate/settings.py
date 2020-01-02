@@ -153,11 +153,9 @@ if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
     AMAZON_DOMAIN = 's3-sa-east-1.amazonaws.com'
     AWS_ACCESS_KEY_ID = config(
         'AWS_ACCESS_KEY_ID',
-        default='AKIAYP73WOXS3Q4UFDUN'
     )
     AWS_SECRET_ACCESS_KEY = config(
         'AWS_SECRET_ACCESS_KEY',
-        default='qPpcCnHHGV1/zvmTCVmbFAIRN1LHVfi9pKNT+w1d'
     )
     AWS_STORAGE_BUCKET_NAME = config(
         'AWS_STORAGE_BUCKET_NAME',
