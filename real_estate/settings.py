@@ -84,14 +84,14 @@ WSGI_APPLICATION = '{PROJECT_NAME}.wsgi.application'.format(
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'real_estate',
-            'USER': 'postgres',
-            'PASSWORD': 'root',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'real_estate',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
 
 # Password validation
@@ -175,3 +175,4 @@ if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
         AWS_LOCATION=AWS_LOCATION
     )
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DEFAULT_FILE_STORAGE = 'real_estate.storage_backends.MediaStorage'
