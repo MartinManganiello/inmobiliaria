@@ -6,8 +6,7 @@ from search.models import Estate, Image
 def index(request):
     latest = Estate.objects.all().order_by('-created')[:3]
     images = Image.objects.filter(estate__in=latest).distinct(
-        'estate').order_by('-estate'
-                           )
+        'estate').order_by('-estate')
 
     context = {
         'images': images
@@ -21,7 +20,8 @@ def about(request):
 
 def properties(request):
     latest = Estate.objects.all().order_by('-created')
-    images = Image.objects.filter(estate__in=latest).distinct('estate')
+    images = Image.objects.filter(estate__in=latest).distinct(
+        'estate').order_by('-estate')
 
     context = {
         'images': images
