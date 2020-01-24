@@ -91,7 +91,7 @@
       <div id="property-carousel" class="owl-carousel owl-theme">
         {% for image in images %}
         <div class="carousel-item-b">
-          <div class="card-box-a card-shadow">
+          <div class="card-box-a card-shadow" href="{% url 'property-single' id=image.estate.id %}">
             <div class="embed-responsive embed-responsive-1by1">
               <img alt="Error al cargar" class="card-img-top embed-responsive-item" src="{{image.image.url}}" />
             </div>
@@ -107,7 +107,7 @@
                   <div class="price-box d-flex">
                     <span class="price-a">{{image.estate.transaction_type}} | {{image.estate.price}}</span>
                   </div>
-                  <a href="#" class="link-a">Más info
+                  <a href="{% url 'property-single' id=image.estate.id %}" class="link-a">Más info
                     <span class="ion-ios-arrow-forward"></span>
                   </a>
                 </div>

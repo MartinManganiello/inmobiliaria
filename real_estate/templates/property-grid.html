@@ -65,7 +65,7 @@
                   <div class="price-box d-flex">
                     <span class="price-a">{{image.estate.transaction_type}} | {{image.estate.price}}</span>
                   </div>
-                  <a href="property-single.html" class="link-a">Ver más
+                  <a href="{% url 'property-single' id=image.estate.id %}" class="link-a">Ver más
                     <span class="ion-ios-arrow-forward"></span>
                   </a>
                 </div>

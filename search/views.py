@@ -19,6 +19,9 @@ def about(request):
 
 
 def properties(request):
+    """
+    View that return all estates
+    """
     latest = Estate.objects.all().order_by('-created')
     images = Image.objects.filter(estate__in=latest).distinct(
         'estate').order_by('-estate')
