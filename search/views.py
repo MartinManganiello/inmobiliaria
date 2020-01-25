@@ -21,20 +21,20 @@ def about(request):
 
 def properties(request):
     latest = Estate.objects.all().order_by('-created')
-    images = Image.objects.filter(estate__in=latest).distinct(
-        'estate').order_by('-estate')
     paginator = Paginator(latest, 2)
     page_number = request.GET.get('page')
     try:
-        estates = paginator.page(page_number)
+        estate_page = paginator.page(page_number)
     except PageNotAnInteger:
-        estates = paginator.page(1)
+        estate_page = paginator.page(1)
     except EmptyPage:
-        estates = paginator.page(paginator.num_pages)
+        estate_page = paginator.page(paginator.num_pages)
+    images = Image.objects.filter(estate__in=estate_page.object_list).distinct(
+        'estate').order_by('-estate')
 
     context = {
         'images': images,
-        'estates': estates
+        'estates': estate_page
     }
     return render(request, 'property-grid.html', context)
 
