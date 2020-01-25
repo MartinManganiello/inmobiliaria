@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from search.models import Estate, Image
 
@@ -20,11 +21,20 @@ def about(request):
 
 def properties(request):
     latest = Estate.objects.all().order_by('-created')
-    images = Image.objects.filter(estate__in=latest).distinct(
+    paginator = Paginator(latest, 2)
+    page_number = request.GET.get('page')
+    try:
+        estate_page = paginator.page(page_number)
+    except PageNotAnInteger:
+        estate_page = paginator.page(1)
+    except EmptyPage:
+        estate_page = paginator.page(paginator.num_pages)
+    images = Image.objects.filter(estate__in=estate_page.object_list).distinct(
         'estate').order_by('-estate')
 
     context = {
-        'images': images
+        'images': images,
+        'estates': estate_page
     }
     return render(request, 'property-grid.html', context)
 

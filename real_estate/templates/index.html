@@ -1,148 +1,141 @@
-{% extends "base.html" %}
-{% load static %}
-  {% block title %}Estate Agency{% endblock %}
-
-  {% block content %}
-  <!--/ Carousel Star /-->
-  <div class="intro intro-carousel">
+{% extends "base.html" %} {% load static %} {% block title %}Estate Agency{% endblock %} {% block content %}
+<!--/ Carousel Star /-->
+<div class="intro intro-carousel">
     <div id="carousel" class="owl-carousel owl-theme">
-      <div class="carousel-item-a intro-item bg-image" style="background-image: url({% static 'img/slide-1.jpg' %})">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345</p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">204 </span> Mount
-                      <br> Olive Road Two</h1>
-                  </div>
+        <div class="carousel-item-a intro-item bg-image" style="background-image: url({% static 'img/slide-1.jpg' %})">
+            <div class="overlay overlay-a"></div>
+            <div class="intro-content display-table">
+                <div class="table-cell">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="intro-body">
+                                    <p class="intro-title-top">Doral, Florida
+                                        <br> 78345</p>
+                                    <h1 class="intro-title mb-4">
+                                        <span class="color-b">204 </span> Mount
+                                        <br> Olive Road Two</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="carousel-item-a intro-item bg-image" style="background-image: url({% static 'img/slide-2.jpg' %})">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345</p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">204 </span> Rino
-                      <br> Venda Road Five</h1>
-                  </div>
+        <div class="carousel-item-a intro-item bg-image" style="background-image: url({% static 'img/slide-2.jpg' %})">
+            <div class="overlay overlay-a"></div>
+            <div class="intro-content display-table">
+                <div class="table-cell">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="intro-body">
+                                    <p class="intro-title-top">Doral, Florida
+                                        <br> 78345</p>
+                                    <h1 class="intro-title mb-4">
+                                        <span class="color-b">204 </span> Rino
+                                        <br> Venda Road Five</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="carousel-item-a intro-item bg-image" style="background-image: url({% static 'img/slide-3.jpg' %})">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345</p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">204 </span> Alira
-                      <br> Roan Road One</h1>
+        <div class="carousel-item-a intro-item bg-image" style="background-image: url({% static 'img/slide-3.jpg' %})">
+            <div class="overlay overlay-a"></div>
+            <div class="intro-content display-table">
+                <div class="table-cell">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="intro-body">
+                                    <p class="intro-title-top">Doral, Florida
+                                        <br> 78345</p>
+                                    <h1 class="intro-title mb-4">
+                                        <span class="color-b">204 </span> Alira
+                                        <br> Roan Road One</h1>
 
-                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <!--/ Carousel end /-->
+</div>
+<!--/ Carousel end /-->
 
-  <!--/ Property Star /-->
-  <section class="section-property section-t8">
+<!--/ Property Star /-->
+<section class="section-property section-t8">
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="title-wrap d-flex justify-content-between">
-            <div class="title-box">
-              <h2 class="title-a">Últimas Propiedades</h2>
-            </div>
-            <div class="title-link">
-              <a href="propiedades">Ver Más
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-wrap d-flex justify-content-between">
+                    <div class="title-box">
+                        <h2 class="title-a">Últimas Propiedades</h2>
+                    </div>
+                    <div class="title-link">
+                        <a href="propiedades">Ver Más
                 <span class="ion-ios-arrow-forward"></span>
               </a>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div id="property-carousel" class="owl-carousel owl-theme">
-        {% for image in images %}
-        <div class="carousel-item-b">
-          <div class="card-box-a card-shadow">
-            <div class="embed-responsive embed-responsive-1by1">
-              <img alt="Error al cargar" class="card-img-top embed-responsive-item" src="{{image.image.url}}" />
-            </div>
-            <div class="card-overlay">
-              <div class="card-overlay-a-content">
-                <div class="card-header-a">
-                  <h2 class="card-title-a">
-                    <a href="{% url 'property-single' id=image.estate.id %}">{{image.estate.address}}
+        <div id="property-carousel" class="owl-carousel owl-theme">
+            {% for image in images %}
+            <div class="carousel-item-b" style="cursor: pointer;" onclick="window.location='{% url 'property-single' id=image.estate.id %}';">
+                <div class="card-box-a card-shadow">
+                    <div class="embed-responsive embed-responsive-1by1">
+                        <img alt="Error al cargar" class="card-img-top embed-responsive-item" src="{{image.image.url}}" />
+                    </div>
+                    <div class="card-overlay">
+                        <div class="card-overlay-a-content">
+                            <div class="card-header-a">
+                                <h2 class="card-title-a">
+                                    <a href="{% url 'property-single' id=image.estate.id %}">{{image.estate.address}}
                       <br /> {{image.estate.province}}</a>
-                  </h2>
-                </div>
-                <div class="card-body-a">
-                  <div class="price-box d-flex">
-                    <span class="price-a">{{image.estate.transaction_type}} | {{image.estate.price}}</span>
-                  </div>
-                  <a href="#" class="link-a">Más info
-                    <span class="ion-ios-arrow-forward"></span>
-                  </a>
-                </div>
-                <div class="card-footer-a">
-                  <ul class="card-info d-flex justify-content-around">
-                    <li>
-                      <h4 class="card-info-title">Area</h4>
-                      <span>{{image.estate.surface}}m
+                                </h2>
+                            </div>
+                            <div class="card-body-a">
+                                <div class="price-box d-flex">
+                                    <span class="price-a">{{image.estate.transaction_type}} | {{image.estate.price}}</span>
+                                </div>
+                            </div>
+                            <div class="card-footer-a">
+                                <ul class="card-info d-flex justify-content-around">
+                                    <li>
+                                        <h4 class="card-info-title">Area</h4>
+                                        <span>{{image.estate.surface}}m
                         <sup>2</sup>
                       </span>
-                    </li>
-                    <li>
-                      <h4 class="card-info-title">Ambientes</h4>
-                      <span>{{image.estate.rooms}}</span>
-                    </li>
-                    <li>
-                      <h4 class="card-info-title">Baños</h4>
-                      <span>4</span>
-                    </li>
-                    <li>
-                      <h4 class="card-info-title">Cochera</h4>
-                      <span>{{image.estate.garage}}</span>
-                    </li>
-                  </ul>
+                                    </li>
+                                    <li>
+                                        <h4 class="card-info-title">Ambientes</h4>
+                                        <span>{{image.estate.rooms}}</span>
+                                    </li>
+                                    <li>
+                                        <h4 class="card-info-title">Baños</h4>
+                                        <span>4</span>
+                                    </li>
+                                    <li>
+                                        <h4 class="card-info-title">Cochera</h4>
+                                        <span>{{image.estate.garage}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-      </div>
     </div>
     </div>
     </div>
-  </section>
-  <!--/ Property End /-->
+</section>
+<!--/ Property End /-->
 
-  {% endblock %}
+{% endblock %}
