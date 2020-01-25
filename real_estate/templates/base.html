@@ -148,18 +148,20 @@
       </button>
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
+          {% with request.resolver_match.url_name as url_name %}
           <li class="nav-item">
-            <a class="nav-link active" href="{% url 'index' %}">Inicio</a>
+            <a class="nav-link {% if url_name == 'index' %} active {% endif %}" href="{% url 'index' %}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'about' %}">Nosotros</a>
+            <a class="nav-link {% if url_name == 'about' %} active {% endif %}" href="{% url 'about' %}">Nosotros</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'properties' %}">Propiedades</a>
+            <a class="nav-link {% if url_name == 'properties' %} active {% endif %}" href="{% url 'properties' %}">Propiedades</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'contact' %}">Contacto</a>
+            <a class="nav-link {% if url_name == 'contact' %} active {% endif %}" href="{% url 'contact' %}">Contacto</a>
           </li>
+          {% endwith %}
         </ul>
       </div>
       <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse"
