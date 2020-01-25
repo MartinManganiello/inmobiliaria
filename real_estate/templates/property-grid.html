@@ -35,11 +35,11 @@
                 <div class="grid-option">
                     <form>
                         <select class="custom-select">
-                <option selected>Todos</option>
-                <option value="1">Nuevos</option>
-                <option value="2">Alquiler</option>
-                <option value="3">Venta</option>
-              </select>
+                            <option selected>Todos</option>
+                            <option value="1">Nuevos</option>
+                            <option value="2">Alquiler</option>
+                            <option value="3">Venta</option>
+                        </select>
                     </form>
                 </div>
             </div>
@@ -47,31 +47,33 @@
             <div class="col-md-4">
                 <div class="card-box-a card-shadow">
                     <div class="embed-responsive embed-responsive-1by1">
-                        <img alt="Card image cap" class="card-img-top embed-responsive-item" src="{{image.image.url}}" />
+                        <img alt="Card image cap" class="card-img-top embed-responsive-item"
+                            src="{{image.image.url}}" />
                     </div>
                     <div class="card-overlay">
                         <div class="card-overlay-a-content">
                             <div class="card-header-a">
                                 <h2 class="card-title-a">
                                     <a href="{% url 'property-single' id=image.estate.id %}">{{image.estate.address}}
-                      <br /> {{image.estate.location}}</a>
+                                        <br /> {{image.estate.location}}</a>
                                 </h2>
                             </div>
                             <div class="card-body-a">
                                 <div class="price-box d-flex">
-                                    <span class="price-a">{{image.estate.transaction_type}} | {{image.estate.price}}</span>
+                                    <span class="price-a">{{image.estate.transaction_type}} |
+                                        {{image.estate.price}}</span>
                                 </div>
                                 <a href="property-single.html" class="link-a">Ver más
-                    <span class="ion-ios-arrow-forward"></span>
-                  </a>
+                                    <span class="ion-ios-arrow-forward"></span>
+                                </a>
                             </div>
                             <div class="card-footer-a">
                                 <ul class="card-info d-flex justify-content-around">
                                     <li>
                                         <h4 class="card-info-title">Area</h4>
                                         <span>{{image.estate.surface}}m
-                        <sup>2</sup>
-                      </span>
+                                            <sup>2</sup>
+                                        </span>
                                     </li>
                                     <li>
                                         <h4 class="card-info-title">Ambientes</h4>
