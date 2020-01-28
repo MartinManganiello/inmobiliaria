@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from search.models import Estate, Image
+from search.constants import ORDER_BY
 
 
 # Create your views here.
@@ -34,7 +35,8 @@ def properties(request):
 
     context = {
         'images': images,
-        'estates': estate_page
+        'estates': estate_page,
+        'ORDER_BY': ORDER_BY
     }
     return render(request, 'property-grid.html', context)
 

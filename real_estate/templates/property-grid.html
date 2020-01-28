@@ -26,19 +26,33 @@
     </div>
 </section>
 <!--/ Intro Single End /-->
+<script>
+    $("#order").on("change", function() {
+        var selectedValue = $(this).text();
 
+        $.ajax({
+            url: "propiedades/",
+            type: "GET",
+            data: {
+                "name": selectedValue
+            },
+            dataType: "json",
+            success: function() {}
+        });
+    });
+</script>
 <!--/ Property Grid Star /-->
 <section class="property-grid grid">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <div class="grid-option">
-                    <form>
-                        <select class="custom-select">
-                            <option selected>Todos</option>
-                            <option value="1">Nuevos</option>
-                            <option value="2">Alquiler</option>
-                            <option value="3">Venta</option>
+                    <form role="form" method="post" action="" name="orderform" id="orderform">
+                        {% csrf_token %}
+                        <select class="custom-select" name='order' id='order' onchange="get_order();">
+                            {% for k, v in ORDER_BY.items %}
+                            <option value="{{ k }}" {% if k == order %} selected="selected" {% endif %}>{{ v }}</option>
+                            {% endfor %}
                         </select>
                     </form>
                 </div>
@@ -47,8 +61,7 @@
             <div class="col-md-4">
                 <div class="card-box-a card-shadow">
                     <div class="embed-responsive embed-responsive-1by1">
-                        <img alt="Card image cap" class="card-img-top embed-responsive-item"
-                            src="{{image.image.url}}" />
+                        <img alt="Card image cap" class="card-img-top embed-responsive-item" src="{{image.image.url}}" />
                     </div>
                     <div class="card-overlay">
                         <div class="card-overlay-a-content">
