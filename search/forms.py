@@ -1,8 +1,7 @@
 from django import forms
-from .models import Estate
 
 
-class AutoForm(forms.Form):
+class OrderForm(forms.Form):
     TYPE_CHOICES = [
         ("1", "Nuevos"),
         ("2", "Alquiler"),

@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from search.models import Estate, Image
-from search.constants import ORDER_BY
+from search.forms import OrderForm
 
 
 # Create your views here.
@@ -23,7 +23,10 @@ def about(request):
 def properties(request):
     latest = Estate.objects.all().order_by('-created')
     paginator = Paginator(latest, 2)
+    import pdb; pdb.set_trace()
+    page_number = request.GET.get('name')
     page_number = request.GET.get('page')
+    form = OrderForm()
     try:
         estate_page = paginator.page(page_number)
     except PageNotAnInteger:
@@ -36,7 +39,7 @@ def properties(request):
     context = {
         'images': images,
         'estates': estate_page,
-        'ORDER_BY': ORDER_BY
+        'form': form,
     }
     return render(request, 'property-grid.html', context)
 

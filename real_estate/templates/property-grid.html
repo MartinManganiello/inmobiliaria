@@ -28,7 +28,7 @@
 <!--/ Intro Single End /-->
 <script>
     $("#order").on("change", function() {
-        var selectedValue = $(this).text();
+        var selectedValue = $(this).value();
 
         $.ajax({
             url: "propiedades/",
@@ -47,11 +47,11 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="grid-option">
-                    <form role="form" method="post" action="" name="orderform" id="orderform">
+                    <form method="post" name="orderform" id="orderform">
                         {% csrf_token %}
-                        <select class="custom-select" name='order' id='order' onchange="get_order();">
-                            {% for k, v in ORDER_BY.items %}
-                            <option value="{{ k }}" {% if k == order %} selected="selected" {% endif %}>{{ v }}</option>
+                        <select class="custom-select" name='order' id='order'>
+                            {% for k, v in form.TYPE_CHOICES %}
+                            <option value="{% url 'properties' k %}" selected="selected">{{ v }}</option>
                             {% endfor %}
                         </select>
                     </form>
