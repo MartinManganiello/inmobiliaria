@@ -8,5 +8,4 @@ class OrderForm(forms.Form):
         ("3", "Venta"),
     ]
 
-    order_by = forms.ChoiceField(choices=TYPE_CHOICES, widget=forms.Select(
-        attrs={'onchange': 'get_order();'}))
+    order_by = forms.ChoiceField(choices=TYPE_CHOICES, widget=forms.Select())

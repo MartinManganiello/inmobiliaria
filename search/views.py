@@ -21,12 +21,24 @@ def about(request):
 
 
 def properties(request):
-    latest = Estate.objects.all().order_by('-created')
-    paginator = Paginator(latest, 2)
-    import pdb; pdb.set_trace()
-    page_number = request.GET.get('name')
+    context = {}
+    query = Estate.objects.all().order_by('-created')
+    paginator = Paginator(query, 2)
     page_number = request.GET.get('page')
-    form = OrderForm()
+    form = OrderForm(request.GET)
+    if request.GET:
+        value = request.GET['order']
+        context['value'] = value
+        if value == OrderForm.TYPE_CHOICES[0][0]:
+            pass
+        elif value == OrderForm.TYPE_CHOICES[1][0]:
+            query = Estate.objects.filter(transaction_type="Aquiler").order_by('-created')
+            paginator = Paginator(query, 2)
+            page_number = request.GET.get('page')
+        elif value == OrderForm.TYPE_CHOICES[2][0]:
+            query = Estate.objects.filter(transaction_type="Venta").order_by('-created')
+            paginator = Paginator(query, 2)
+            page_number = request.GET.get('page')
     try:
         estate_page = paginator.page(page_number)
     except PageNotAnInteger:
@@ -36,11 +48,10 @@ def properties(request):
     images = Image.objects.filter(estate__in=estate_page.object_list).distinct(
         'estate').order_by('-estate')
 
-    context = {
-        'images': images,
-        'estates': estate_page,
-        'form': form,
-    }
+    context['images'] = images
+    context['estates'] = estate_page
+    context['form'] = form
+
     return render(request, 'property-grid.html', context)
 
 

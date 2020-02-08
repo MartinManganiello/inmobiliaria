@@ -26,32 +26,18 @@
     </div>
 </section>
 <!--/ Intro Single End /-->
-<script>
-    $("#order").on("change", function() {
-        var selectedValue = $(this).value();
 
-        $.ajax({
-            url: "propiedades/",
-            type: "GET",
-            data: {
-                "name": selectedValue
-            },
-            dataType: "json",
-            success: function() {}
-        });
-    });
-</script>
 <!--/ Property Grid Star /-->
 <section class="property-grid grid">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <div class="grid-option">
-                    <form method="post" name="orderform" id="orderform">
+                    <form method="GET" action="{% url 'properties' %}" name="orderform" id="orderform">
                         {% csrf_token %}
-                        <select class="custom-select" name='order' id='order'>
-                            {% for k, v in form.TYPE_CHOICES %}
-                            <option value="{% url 'properties' k %}" selected="selected">{{ v }}</option>
+                        <select class="custom-select" name='order' id='order' onchange="this.form.submit()">
+                            {% for k, v in form.fields.order_by.choices %}
+                            <option value={{ k }} {% if k == value %} selected="selected" {% endif %}>{{ v }}</option>
                             {% endfor %}
                         </select>
                     </form>
