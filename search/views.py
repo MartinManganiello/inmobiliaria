@@ -27,7 +27,7 @@ def properties(request):
     page_number = request.GET.get('page')
     form = OrderForm(request.GET)
     if request.GET:
-        value = request.GET['order']
+        value = request.GET.get('order')
         context['value'] = value
         if value == OrderForm.TYPE_CHOICES[0][0]:
             pass
