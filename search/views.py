@@ -22,23 +22,23 @@ def about(request):
 
 def properties(request):
     context = {}
-    query = Estate.objects.all().order_by('-created')
-    paginator = Paginator(query, 2)
-    page_number = request.GET.get('page')
+    value = request.GET.get('order', '1')
+    context['value'] = value
+    import pdb; pdb.set_trace()
     form = OrderForm(request.GET)
-    if request.GET:
-        value = request.GET.get('order')
-        context['value'] = value
-        if value == OrderForm.TYPE_CHOICES[0][0]:
-            pass
-        elif value == OrderForm.TYPE_CHOICES[1][0]:
-            query = Estate.objects.filter(transaction_type="Aquiler").order_by('-created')
-            paginator = Paginator(query, 2)
-            page_number = request.GET.get('page')
-        elif value == OrderForm.TYPE_CHOICES[2][0]:
-            query = Estate.objects.filter(transaction_type="Venta").order_by('-created')
-            paginator = Paginator(query, 2)
-            page_number = request.GET.get('page')
+    if value == '1':
+        query = Estate.objects.all().order_by('-created')
+        paginator = Paginator(query, 2)
+        page_number = request.GET.get('page')
+    elif value == '2':
+        query = Estate.objects.filter(transaction_type="Aquiler").order_by('-created')
+        paginator = Paginator(query, 2)
+        page_number = request.GET.get('page')
+    else:
+        query = Estate.objects.filter(transaction_type="Venta").order_by('-created')
+        paginator = Paginator(query, 2)
+        page_number = request.GET.get('page')
+
     try:
         estate_page = paginator.page(page_number)
     except PageNotAnInteger:
