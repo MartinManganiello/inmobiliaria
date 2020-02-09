@@ -24,7 +24,6 @@ def properties(request):
     context = {}
     value = request.GET.get('order', '1')
     context['value'] = value
-    import pdb; pdb.set_trace()
     form = OrderForm(request.GET)
     if value == '1':
         query = Estate.objects.all().order_by('-created')
