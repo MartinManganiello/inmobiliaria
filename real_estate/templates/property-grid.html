@@ -33,12 +33,11 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="grid-option">
-                    <form>
-                        <select class="custom-select">
-                            <option selected>Todos</option>
-                            <option value="1">Nuevos</option>
-                            <option value="2">Alquiler</option>
-                            <option value="3">Venta</option>
+                    <form method="GET" action="{% url 'properties' %}" name="orderform" id="orderform">
+                        <select class="custom-select" name='order' id='order' onchange="this.form.submit()">
+                            {% for k, v in form.fields.order_by.choices %}
+                            <option value={{ k }} {% if k == value %} selected="selected" {% endif %}>{{ v }}</option>
+                            {% endfor %}
                         </select>
                     </form>
                 </div>
@@ -47,8 +46,7 @@
             <div class="col-md-4">
                 <div class="card-box-a card-shadow">
                     <div class="embed-responsive embed-responsive-1by1">
-                        <img alt="Card image cap" class="card-img-top embed-responsive-item"
-                            src="{{image.image.url}}" />
+                        <img alt="Card image cap" class="card-img-top embed-responsive-item" src="{{image.image.url}}" />
                     </div>
                     <div class="card-overlay">
                         <div class="card-overlay-a-content">
@@ -102,7 +100,7 @@
                     <ul class="pagination justify-content-end">
                         {% if estates.has_previous %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{ estates.previous_page_number }}" tabindex="-1">
+                            <a class="page-link" href="?page={{ estates.previous_page_number }}&order={{ value }}" tabindex="-1">
                                 <span class="ion-ios-arrow-back"></span>
                             </a>
                         </li>
@@ -118,7 +116,7 @@
                         </li>
                         {% endif %} {% endfor %} {% if estates.has_next %}
                         <li class="page-item next">
-                            <a class="page-link" href="?page={{ estates.next_page_number }}">
+                            <a class="page-link" href="?page={{ estates.next_page_number }}&order={{ value }}">
                                 <span class="ion-ios-arrow-forward"></span>
                             </a>
                         </li>
