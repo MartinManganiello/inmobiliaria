@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from search.models import Estate, Image
-from search.forms import OrderForm
+from search.forms import OrderForm, SearchForm
 
 
 # Create your views here.
@@ -11,17 +11,46 @@ def index(request):
         'estate').order_by('-estate')
 
     context = {
-        'images': images
+        'images': images,
+        'provinces': Estate.VALID_PROVINCES,
+        'types': Estate.TRANSACTION_TYPE,
+        'rooms': range(1, 7)
     }
     return render(request, 'index.html', context)
 
 
 def about(request):
-    return render(request, 'about.html')
+    context = {
+        'provinces': Estate.VALID_PROVINCES,
+        'types': Estate.TRANSACTION_TYPE,
+        'rooms': range(1, 7)
+    }
+    return render(request, 'about.html', context)
 
 
 def properties(request):
     context = {}
+    if request.method == "POST":
+        import pdb; pdb.set_trace()
+        # Province
+        province_selected = request.POST.get('province_selected')
+        context['province_selected'] = province_selected
+        # Type
+        transaction_type = request.POST.get('transaction_type')
+        context['transaction_type'] = transaction_type
+        # Bedrooms
+        bedrooms = request.POST.get('bedrooms', 0)
+        context['bedrooms'] = bedrooms
+        # garaje
+        garaje = request.POST.get('garaje', 0)
+        context['garaje'] = garaje
+        # bathroom
+        bathroom = request.POST.get('bathroom', 0)
+        context['bathroom'] = bathroom
+        # price
+        price = request.POST.get('price')
+        context['price'] = price
+
     value = request.GET.get('order', '1')
     context['value'] = value
     form = OrderForm(request.GET)
@@ -50,12 +79,20 @@ def properties(request):
     context['images'] = images
     context['estates'] = estate_page
     context['form'] = form
+    context['provinces'] = Estate.VALID_PROVINCES
+    context['types'] = Estate.TRANSACTION_TYPE
+    context['rooms'] = range(1, 7)
 
     return render(request, 'property-grid.html', context)
 
 
 def contact(request):
-    return render(request, 'contact.html')
+    context = {
+        'provinces': Estate.VALID_PROVINCES,
+        'types': Estate.TRANSACTION_TYPE,
+        'rooms': range(1, 7)
+    }
+    return render(request, 'contact.html', context)
 
 
 def property_single(request, id):
@@ -63,6 +100,9 @@ def property_single(request, id):
     images = Image.objects.filter(estate=estate)
     context = {
         'estate': estate,
-        'images': images
+        'images': images,
+        'provinces': Estate.VALID_PROVINCES,
+        'types': Estate.TRANSACTION_TYPE,
+        'rooms': range(1, 7)
     }
     return render(request, 'property-single.html', context)
