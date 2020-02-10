@@ -51,6 +51,7 @@ class Estate(models.Model):
     rooms = models.PositiveIntegerField()
     surface = models.PositiveIntegerField()
     garage = models.PositiveIntegerField()
+    bathroom = models.PositiveIntegerField()
 
     def __str__(self):
         return str(self.address) + ": $" + str(self.price)
