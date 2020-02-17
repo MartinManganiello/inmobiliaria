@@ -12,61 +12,72 @@ def index(request):
 
     context = {
         'images': images,
-        'provinces': Estate.VALID_PROVINCES,
+        'provinces': [prov for prov in enumerate(Estate.VALID_PROVINCES)],
         'types': Estate.TRANSACTION_TYPE,
-        'rooms': range(1, 7)
+        'rooms': range(1, 7),
+        'bathrooms': range(1, 5),
+        'garages': range(1, 4)
     }
     return render(request, 'index.html', context)
 
 
 def about(request):
     context = {
-        'provinces': Estate.VALID_PROVINCES,
+        'provinces': [prov for prov in enumerate(Estate.VALID_PROVINCES)],
         'types': Estate.TRANSACTION_TYPE,
-        'rooms': range(1, 7)
+        'rooms': range(1, 7),
+        'bathrooms': range(1, 5),
+        'garages': range(1, 4),
     }
     return render(request, 'about.html', context)
 
 
 def properties(request):
     context = {}
+    form = OrderForm(request.GET)
     if request.method == "POST":
-        import pdb; pdb.set_trace()
+        form = OrderForm(request.POST)
+        #import pdb; pdb.set_trace()
         # Province
-        province_selected = request.POST.get('province_selected')
+        province_selected = request.POST.get('city')
         context['province_selected'] = province_selected
         # Type
-        transaction_type = request.POST.get('transaction_type')
+        transaction_type = request.POST.get('Type')
         context['transaction_type'] = transaction_type
         # Bedrooms
         bedrooms = request.POST.get('bedrooms', 0)
         context['bedrooms'] = bedrooms
         # garaje
-        garaje = request.POST.get('garaje', 0)
-        context['garaje'] = garaje
+        garage = request.POST.get('garage', 0)
+        context['garage'] = garage
         # bathroom
-        bathroom = request.POST.get('bathroom', 0)
-        context['bathroom'] = bathroom
+        bathrooms = request.POST.get('bathrooms', 0)
+        context['bathrooms'] = bathrooms
         # price
         price = request.POST.get('price')
         context['price'] = price
-
-    value = request.GET.get('order', '1')
-    context['value'] = value
-    form = OrderForm(request.GET)
-    if value == '1':
-        query = Estate.objects.all().order_by('-created')
-        paginator = Paginator(query, 2)
-        page_number = request.GET.get('page')
-    elif value == '2':
-        query = Estate.objects.filter(transaction_type="Aquiler").order_by('-created')
+        # New Query:
+        query = Estate.objects.filter(
+            province=Estate.VALID_PROVINCES[int(province_selected)]
+        ).order_by('-created')
         paginator = Paginator(query, 2)
         page_number = request.GET.get('page')
     else:
-        query = Estate.objects.filter(transaction_type="Venta").order_by('-created')
-        paginator = Paginator(query, 2)
-        page_number = request.GET.get('page')
-
+        value = request.GET.get('order', '1')
+        context['value'] = value
+        form = OrderForm(request.GET)
+        if value == '1':
+            query = Estate.objects.all().order_by('-created')
+            paginator = Paginator(query, 2)
+            page_number = request.GET.get('page')
+        elif value == '2':
+            query = Estate.objects.filter(transaction_type="Aquiler").order_by('-created')
+            paginator = Paginator(query, 2)
+            page_number = request.GET.get('page')
+        else:
+            query = Estate.objects.filter(transaction_type="Venta").order_by('-created')
+            paginator = Paginator(query, 2)
+            page_number = request.GET.get('page')
     try:
         estate_page = paginator.page(page_number)
     except PageNotAnInteger:
@@ -79,18 +90,22 @@ def properties(request):
     context['images'] = images
     context['estates'] = estate_page
     context['form'] = form
-    context['provinces'] = Estate.VALID_PROVINCES
+    context['provinces'] = [prov for prov in enumerate(Estate.VALID_PROVINCES)]
     context['types'] = Estate.TRANSACTION_TYPE
     context['rooms'] = range(1, 7)
+    context['bathrooms'] = range(1, 5)
+    context['garages'] = range(1, 4)
 
     return render(request, 'property-grid.html', context)
 
 
 def contact(request):
     context = {
-        'provinces': Estate.VALID_PROVINCES,
+        'provinces': [prov for prov in enumerate(Estate.VALID_PROVINCES)],
         'types': Estate.TRANSACTION_TYPE,
-        'rooms': range(1, 7)
+        'rooms': range(1, 7),
+        'bathrooms': range(1, 5),
+        'garages': range(1, 4)
     }
     return render(request, 'contact.html', context)
 
@@ -101,8 +116,10 @@ def property_single(request, id):
     context = {
         'estate': estate,
         'images': images,
-        'provinces': Estate.VALID_PROVINCES,
+        'provinces': [prov for prov in enumerate(Estate.VALID_PROVINCES)],
         'types': Estate.TRANSACTION_TYPE,
-        'rooms': range(1, 7)
+        'rooms': range(1, 7),
+        'bathrooms': range(1, 5),
+        'garages': range(1, 4)
     }
     return render(request, 'property-single.html', context)

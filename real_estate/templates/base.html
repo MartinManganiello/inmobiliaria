@@ -67,11 +67,11 @@
           </div>
           <div class="col-md-6 mb-2">
             <div class="form-group">
-              <label for="city">Ciudad</label>
+              <label for="city">Provincia</label>
               <select class="form-control form-control-lg form-control-a" id="city" name="city">
-                {% for province in provinces %}
-                <option value={{ province }} {% if province == province_selected %} selected="selected" {% endif %}>
-                  {{ province }}</option>
+                {% for k, v in provinces %}
+                <option value={{ k }} {% if k == province_selected %} selected="selected" {% endif %}>
+                  {{ v }}</option>
                 {% endfor %}
               </select>
             </div>
@@ -88,9 +88,11 @@
           </div>
           <div class="col-md-6 mb-2">
             <div class="form-group">
-              <label for="garages">Garages</label>
-              <select class="form-control form-control-lg form-control-a" id="garages" name="garaje">
-                <option>Any</option>
+              <label for="garages">Cocheras</label>
+              <select class="form-control form-control-lg form-control-a" id="garage" name="garage">
+                {% for garage in garages %}
+                <option value={{ garage }} {% if garage == garaje %} selected="selected" {% endif %}>{{ garage }}</option>
+                {% endfor %}
               </select>
             </div>
           </div>
@@ -98,7 +100,9 @@
             <div class="form-group">
               <label for="bathrooms">Baños</label>
               <select class="form-control form-control-lg form-control-a" id="bathrooms" name="bathrooms">
-                <option>Any</option>
+                {% for bathroom in bathrooms %}
+                <option value={{ bathroom }} {% if bathroom == bathroom %} selected="selected" {% endif %}>{{ bathroom }}</option>
+                {% endfor %}
               </select>
             </div>
           </div>
